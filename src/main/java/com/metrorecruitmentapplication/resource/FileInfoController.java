@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1")
 public class FileInfoController {
@@ -20,7 +22,7 @@ public class FileInfoController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<UploadResponse> uploadFile(@RequestParam(name = "file", required = false)MultipartFile file){
+    public ResponseEntity<UploadResponse> uploadFile(@RequestParam(name = "file", required = false) MultipartFile file){
         String fileName = fileInfoService.storeFile(file);
         UploadResponse uploadResponse = new UploadResponse(fileName);
         return ResponseEntity.ok().body(uploadResponse);

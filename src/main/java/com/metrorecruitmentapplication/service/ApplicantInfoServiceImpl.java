@@ -1,6 +1,7 @@
 package com.metrorecruitmentapplication.service;
 
 import com.metrorecruitmentapplication.domain.ApplicantInfo;
+import com.metrorecruitmentapplication.domain.UploadInfo;
 import com.metrorecruitmentapplication.dto.ApplicantInfoDTO;
 import com.metrorecruitmentapplication.emumerations.CurrentEmploymentStatus;
 import com.metrorecruitmentapplication.emumerations.Gender;
@@ -10,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
 
 @Service
 @RequiredArgsConstructor

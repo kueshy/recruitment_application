@@ -1,5 +1,6 @@
 package com.metrorecruitmentapplication.dto;
 
+import com.metrorecruitmentapplication.domain.UploadInfo;
 import com.metrorecruitmentapplication.emumerations.CurrentEmploymentStatus;
 import com.metrorecruitmentapplication.emumerations.Gender;
 import com.metrorecruitmentapplication.emumerations.HighestAcademicQualification;
@@ -8,10 +9,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
+import java.util.Collection;
 
 @Data
 @AllArgsConstructor
@@ -45,5 +46,9 @@ public class ApplicantInfoDTO {
     private CurrentEmploymentStatus current_employment_status;
 //    @NotEmpty
 //    private byte[] file_document;
-    private String file_name;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "applicant_files",
+            joinColumns = @JoinColumn(name = "applicant_id"),
+            inverseJoinColumns = @JoinColumn(name = "file_id"))
+    private UploadInfo file_name;
 }

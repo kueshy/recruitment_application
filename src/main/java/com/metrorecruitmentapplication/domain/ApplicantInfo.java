@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
 
 @Data
 @AllArgsConstructor
@@ -61,6 +60,6 @@ public class ApplicantInfo {
     private int years_of_experience;
     @Column(name = "current_employment_status")
     private String current_employment_status;
-
-    private String file_name;
+    @Column(name = "file_name", columnDefinition = "BLOB")
+    private byte[] file_name;
 }

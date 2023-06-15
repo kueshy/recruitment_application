@@ -2,6 +2,7 @@ package com.metrorecruitmentapplication.resource;
 
 import com.metrorecruitmentapplication.domain.ApplicantInfo;
 import com.metrorecruitmentapplication.domain.HttpResponse;
+import com.metrorecruitmentapplication.domain.UploadInfo;
 import com.metrorecruitmentapplication.dto.ApplicantInfoDTO;
 import com.metrorecruitmentapplication.service.ApplicantInfoServiceImpl;
 import com.metrorecruitmentapplication.service.ApplicantInfoservice;
@@ -12,8 +13,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
 import java.time.Instant;
+import java.util.Collection;
 import java.util.Map;
 
 @RestController
@@ -24,10 +28,12 @@ public class ApplicantInfoController {
     private final ApplicantInfoservice applicantInfoservice;
 
     @PostMapping("/new_applicant")
-    public ResponseEntity<HttpResponse> createApplicant(@RequestBody ApplicantInfoDTO applicantInfo
-//                                                        @RequestParam("file")MultipartFile multipartFile
+    public ResponseEntity<HttpResponse> createApplicant(@RequestBody ApplicantInfoDTO applicantInfo,
+                                                        @RequestParam("file") MultipartFile multipartFile
     ) throws IOException {
         ApplicantInfoDTO applicantInfoDTO = applicantInfoservice.createApplicantInfo(applicantInfo);
+
+        applicantInfoDTO.setFile_name((UploadInfo) multipartFile);
 
         return ResponseEntity.created(null).body(
                 HttpResponse.builder().timestamp((Instant.now().toString())
